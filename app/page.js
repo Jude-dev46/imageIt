@@ -16,9 +16,9 @@ export default function Home() {
   const [image, setImage] = useState("");
   const inputRef = useRef();
   const surpriseOptions = [
-    "A blue Ostrich eating melon",
-    "A matisse style shark on the telephone",
-    "A pineapple sunbathing on a beach",
+    "Elon Musk in a blue hat",
+    "A Macbook Pro",
+    "A Blue Hat",
   ];
 
   // surprise me handler
