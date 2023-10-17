@@ -19,7 +19,7 @@ export default function Home() {
   const surpriseOptions = [
     "Puppy in a blue hat",
     "A Macbook Pro",
-    "A Blue Hat",
+    "A Blue Limo",
   ];
 
   // surprise me handler
