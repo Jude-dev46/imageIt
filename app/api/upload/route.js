@@ -1,24 +1,44 @@
-// import formidable from "formidable";
 const fs = require("fs");
+const path = require("path");
 
 export async function POST(req) {
   const form = await req.formData();
-  const [entry] = form;
+  const file = form.get("file");
 
-  const name = entry[0];
-  const file = entry[1];
+  if (!file) {
+    return Response.json({
+      status: false,
+      message: "No file uploaded!",
+      data: "",
+    });
+  }
 
-  fs.writeFile(`public/${file.name}`, "This is an image file", (err) => {
-    if (err) {
-      console.error(err);
+  if (file.type !== "image/png") {
+    return Response.json({
+      status: false,
+      message: "Invalid. Upload a png file!",
+      data: "",
+    });
+  }
+
+  const bytes = await file.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+
+  fs.writeFile(
+    path.join(__dirname, "../../../../../public", file.name),
+    buffer,
+    (err, data) => {
+      if (err) {
+        console.log("error", err);
+      }
     }
-    console.log("File written successfully");
-    console.log("The written has the following contents:");
+  );
 
-    fs.readFileSync(`public/${file.name}`, { encoding: "base64" });
-  });
+  const filePath = path.join(__dirname, "../../../../../public", file.name);
 
-  return new Response(JSON.stringify({ message: file.name }), {
-    headers: { "Content-Type": "application/json" },
+  return Response.json({
+    status: true,
+    message: "Successfully uploaded image!",
+    imageUrl: filePath,
   });
 }

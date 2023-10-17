@@ -28,11 +28,11 @@ const Search = ({
             onChange={(e) => {
               valueHandler(e.target.value);
             }}
-            className="w-4/5 h-10 p-3 text-sm md:text-xl border-none rounded-tl-md rounded-bl-md flex flex-wrap shadow-md outline-none"
+            className="w-3/5 lg:w-4/5 h-10 p-3 text-sm md:text-xl border-none rounded-tl-md rounded-bl-md flex flex-wrap shadow-md outline-none"
           />
           <button
             onClick={getImages}
-            className="bg-blue-950 w-1/5 h-10 text-white rounded-t-md rounded-b-md text-xs md:text-lg hover:bg-blue-900"
+            className="bg-blue-950 w-2/5 lg:w-1/5 h-10 text-white rounded-t-md rounded-b-md text-xs md:text-lg hover:bg-blue-900"
           >
             Generate
           </button>

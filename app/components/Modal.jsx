@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 const Modal = ({
   closeModal,
   setSelectedImage,
+  message,
   selectedImage,
   getVariations,
 }) => {
@@ -44,6 +45,7 @@ const Modal = ({
           )}
         </div>
         {error && <p>Error: Image must be a PNG file of 256x256</p>}
+        <p className="flex flex-wrap">{message}</p>
         {!error && (
           <button
             className="bg-blue-900 mt-2 text-white rounded-md hover:bg-blue-950"

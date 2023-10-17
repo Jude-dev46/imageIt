@@ -13,10 +13,11 @@ export default function Home() {
   const [value, setValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [message, setMessage] = useState(false);
   const [image, setImage] = useState("");
   const inputRef = useRef();
   const surpriseOptions = [
-    "Elon Musk in a blue hat",
+    "Puppy in a blue hat",
     "A Macbook Pro",
     "A Blue Hat",
   ];
@@ -51,7 +52,7 @@ export default function Home() {
       const res = await fetch("/api/generation", options);
       const data = await res.json();
 
-      setImages(data.imageUrl.data);
+      setImages(data.data);
       setIsLoading(false);
     } catch (err) {
       console.error("Error", err);
@@ -61,11 +62,10 @@ export default function Home() {
   // upload image for variations
   const uploadImageHandler = async (e) => {
     const formData = new FormData();
-    formData.append("file", e.target.files[0]);
+    formData.set("file", e.target.files[0]);
 
     setSelectedImage(e.target.files[0]);
     setOpenModal(true);
-    console.log(selectedImage);
 
     try {
       const options = {
@@ -76,17 +76,17 @@ export default function Home() {
       const res = await fetch("/api/upload", options);
       const data = await res.json();
 
-      console.log(data);
-      setImage(data);
+      setMessage(data.message);
+      setImage(data.imageUrl);
     } catch (err) {
       console.log("Error", err);
     }
   };
-  console.log(image);
 
   // Getting variations
   const getVariations = async () => {
-    setImages(null);
+    setOpenModal(false);
+    setIsLoading(true);
 
     try {
       const options = {
@@ -99,14 +99,15 @@ export default function Home() {
       const res = await fetch("/api/variations", options);
       const data = await res.json();
 
-      console.log(data);
+      setIsLoading(false);
+      setImages(data.data);
     } catch (err) {
       console.error(err);
     }
   };
 
   return (
-    <main className="bg-[url('/bg.png')] h-screen w-screen flex flex-col items-center justify-between">
+    <main className="bg-[url('/bg.png')] h-[100svh] w-screen flex flex-col items-center justify-between">
       <Search
         getImages={getImages}
         value={inputRef}
@@ -118,6 +119,7 @@ export default function Home() {
         <Modal
           closeModal={setOpenModal}
           setSelectedImage={setSelectedImage}
+          message={message}
           selectedImage={selectedImage}
           getVariations={getVariations}
         />
