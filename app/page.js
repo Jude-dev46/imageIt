@@ -37,6 +37,7 @@ export default function Home() {
   const getImages = async () => {
     inputRef.current.value = "";
     setImages(null);
+    setError(false);
     setIsLoading(true);
 
     try {
@@ -69,6 +70,7 @@ export default function Home() {
 
   // upload image for variations
   const uploadImageHandler = async (e) => {
+    setError(false);
     const formData = new FormData();
     formData.set("file", e.target.files[0]);
 
@@ -101,6 +103,7 @@ export default function Home() {
 
   // Getting variations
   const getVariations = async () => {
+    setError(false);
     setOpenModal(false);
     setIsLoading(true);
 
