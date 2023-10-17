@@ -24,6 +24,7 @@ export async function POST(req) {
       })
     );
   } catch (err) {
+    console.log("Error:", err);
     return new Response(
       JSON.stringify({
         status: "error",
