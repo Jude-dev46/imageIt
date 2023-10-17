@@ -16,7 +16,7 @@ const Images = ({ images, error }) => {
           </div>
         ))}
         {error && (
-          <p className="text-white font-semibold text-2xl">
+          <p className="w-full text-white font-semibold text-2xl">
             😥Could not fetch images, Try again.
           </p>
         )}
