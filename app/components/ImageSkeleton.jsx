@@ -8,8 +8,6 @@ const ImageSkeleton = () => {
         <div className="bg-gray w-full md:w-64 h-48"></div>
         <div className="bg-gray w-full md:w-64 h-48"></div>
         <div className="bg-gray w-full md:w-64 h-48"></div>
-        <div className="bg-gray w-full md:w-64 h-48"></div>
-        <div className="bg-gray w-full md:w-64 h-48"></div>
       </div>
     </div>
   );

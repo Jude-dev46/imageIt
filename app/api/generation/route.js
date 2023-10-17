@@ -8,7 +8,7 @@ export async function POST(req) {
   try {
     const response = await openai.images.generate({
       prompt: value.message,
-      n: 8,
+      n: 6,
       size: "1024x1024",
     });
 
