@@ -14,6 +14,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [message, setMessage] = useState(false);
+  const [error, setError] = useState(false);
   const [image, setImage] = useState("");
   const inputRef = useRef();
   const surpriseOptions = [
@@ -50,12 +51,19 @@ export default function Home() {
       };
 
       const res = await fetch("/api/generation", options);
+
+      if (!res.ok) {
+        setIsLoading(false);
+        setError(true);
+        return;
+      }
       const data = await res.json();
 
       setImages(data.data);
       setIsLoading(false);
     } catch (err) {
-      console.error("Error", err);
+      setIsLoading(false);
+      setError(true);
     }
   };
 
@@ -74,12 +82,20 @@ export default function Home() {
       };
 
       const res = await fetch("/api/upload", options);
+
+      if (!res.ok) {
+        setIsLoading(false);
+        setError(true);
+        return;
+      }
+
       const data = await res.json();
 
       setMessage(data.message);
       setImage(data.imageUrl);
     } catch (err) {
-      console.log("Error", err);
+      setIsLoading(false);
+      setError(true);
     }
   };
 
@@ -97,12 +113,20 @@ export default function Home() {
       };
 
       const res = await fetch("/api/variations", options);
+
+      if (!res.ok) {
+        setIsLoading(false);
+        setError(true);
+        return;
+      }
+
       const data = await res.json();
 
       setIsLoading(false);
       setImages(data.data);
     } catch (err) {
-      console.error(err);
+      setIsLoading(false);
+      setError(true);
     }
   };
 
@@ -124,7 +148,7 @@ export default function Home() {
           getVariations={getVariations}
         />
       )}
-      {!isLoading && <Images images={images} />}
+      {!isLoading && <Images images={images} error={error} />}
       {isLoading && <ImageSkeleton />}
       <Footer />
     </main>

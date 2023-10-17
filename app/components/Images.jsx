@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const Images = ({ images }) => {
+const Images = ({ images, error }) => {
   return (
     <div className="w-full h-full flex justify-center mt-3 mb-2">
       <div className="flex flex-wrap w-11/12 md:w-3/4 lg:w-2/4 justify-center max-h-108 gap-3 overflow-scroll hide-scroll -mb-3">
@@ -15,6 +15,11 @@ const Images = ({ images }) => {
             />
           </div>
         ))}
+        {error && (
+          <p className="text-white font-semibold text-2xl">
+            😥Could not fetch images, Try again.
+          </p>
+        )}
       </div>
     </div>
   );
