@@ -40,5 +40,6 @@ export async function POST(req) {
     status: true,
     message: "Successfully uploaded image!",
     imageUrl: filePath,
+    imageName: file.name,
   });
 }
